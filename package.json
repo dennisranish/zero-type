@@ -1,0 +1,25 @@
+{
+	"name": "zero-type",
+	"version": "1.0.0",
+	"description": "Javascript/Typescript type checking library.",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dennisranish/zero-type.git"
+	},
+	"keywords": [],
+	"author": "Dennis Ranish",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/dennisranish/zero-type/issues"
+	},
+	"homepage": "https://github.com/dennisranish/zero-type#readme",
+	"devDependencies": {
+		"typescript": "^4.5.2"
+	}
+}
