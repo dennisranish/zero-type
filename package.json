@@ -12,7 +12,15 @@
 		"type": "git",
 		"url": "git+https://github.com/dennisranish/zero-type.git"
 	},
-	"keywords": [],
+	"keywords": [
+		"zero-type",
+		"validator",
+		"validation",
+		"type",
+		"check",
+		"Checker",
+		"checking"
+	  ],
 	"author": "Dennis Ranish",
 	"license": "ISC",
 	"bugs": {
