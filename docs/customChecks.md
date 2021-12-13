@@ -7,8 +7,8 @@ export class CustomCheck extends TypeCheck {
 	value: number;
 	constructor(value: number){ super(); this.value = value; }
 	compile(info: CompileInfo, path: string, debugPath: string) {
-		return `if(${path}<${info.ch.value(this.value)})${
-		compileDebug(info, debugPath, `'CustomCheck'`, `'is not \\''+${info.ch.value(this.value)}.name+'\\''`)}`;
+		return `if(${path}>=${info.ch.value(this.value)})${
+		compileDebug(info, debugPath, `'CustomCheck'`, `'is not less than or equal to ${info.ch.value(this.value)}'`)}`;
 	}
 };
 ```
