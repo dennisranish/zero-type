@@ -1,6 +1,6 @@
 {
 	"name": "zero-type",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Javascript/Typescript type checking library.",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -22,7 +22,7 @@
 		"checking"
 	  ],
 	"author": "Dennis Ranish",
-	"license": "ISC",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/dennisranish/zero-type/issues"
 	},
