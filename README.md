@@ -1,6 +1,6 @@
 # zero-type
 
-Extensive and customizable type checking. Deep object structures, classes, specific values, and custom check functions. Compiles type validators into fast and small functions and has type guards if using typescript. Optionally type validators can be compiled to output list of errors in submitted object. This library also comes with handy basic type checking functions.
+Extensive and customizable type checking. Deep object structures, classes, specific values, and custom check functions. Compiles type validators into fast and small functions and has type guards if using typescript. Optionally type validators can be compiled to output a list of errors in submitted the object. This library also comes with handy basic type checking functions.
 
 > Note this readme is just a preview for full docs [go here](https://github.com/dennisranish/zero-type/tree/master/docs#readme).
 
@@ -32,9 +32,9 @@ let isValid = typeCheck.validate(myObject);
 
 ---
 ## Compile **before** runtime example
-This creates two validator functions and writes the generated typescript code to a file so that it only needs to be compiled once before the prgram that uses it runs.
+This creates two validator functions and writes the generated typescript code to a file so that it only needs to be compiled once before the program that uses it runs.
 
-The validators can check using user defined values like classes, but need to be told how to get a refrence to the value in the generated file (if you are not compiling before hand this handled automatically). Either use `addStaticImport` to let the generated file import the value or dynamicly link the values (explained further down).
+The validators can check using user defined values like classes, but need to be told how to get a reference to the value in the generated file (if you are compiling during runtime this is handled automatically). Either use `addStaticImport` to let the generated file import the value or dynamically link the values (explained further down).
 
 ```typescript
 import { writeFileSync } from 'fs';

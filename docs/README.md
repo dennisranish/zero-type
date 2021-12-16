@@ -1,6 +1,6 @@
 # zero-type - docs
 
-Extensive and customizable type checking. Deep object structures, classes, specific values, and custom check functions. Compiles type validators into fast and small functions and has type guards if using typescript. Optionally type validators can be compiled to output list of errors in submitted object. This library also comes with handy basic type checking functions.
+Extensive and customizable type checking. Deep object structures, classes, specific values, and custom check functions. Compiles type validators into fast and small functions and has type guards if using typescript. Optionally type validators can be compiled to output a list of errors in submitted the object. This library also comes with handy basic type checking functions.
 
 - [Building](https://github.com/dennisranish/zero-type/blob/master/docs/building.md)
 - [Compiling](https://github.com/dennisranish/zero-type/blob/master/docs/compiling.md)
@@ -10,8 +10,8 @@ Extensive and customizable type checking. Deep object structures, classes, speci
 ---
 ## Example file structure if compiling before runtime
 If you choose to compile before runtime here is a basic project structure you can follow to make things easier.
-- Make sure libray is installed `npm install zero-type`
-- Add another folder to project root directory. Ex: `./zero-type`
+- Make sure the library is installed `npm install zero-type`
+- Add another folder to the project root directory. Ex: `./zero-type`
 - Add ts/js file with code to generate validators. Ex: `./zero-type/index.ts`
 ```typescript
 import { writeFileSync } from 'fs';

@@ -4,7 +4,7 @@ There are two ways to use validators
 - compile them during runtime
 - compile them before runtime
 
-This **compiles during runtime**; note that you call compile on each function, and don't need to worry about linking at all. Building and compiling take some time to run, likely not long, but it is best to only run them once when the program start. Also when using typescript `typeCheck.validate` is a type guard and the type is automatically generated for us when we create the validator.
+This **compiles during runtime**; note that you call compile on each function, and don't need to worry about linking at all. Building and compiling take some time to run, likely not long, but it is best to only run them once when the program starts. Also when using typescript `typeCheck.validate` is a type guard and the type is automatically generated for us when we create the validator.
 
 ```typescript
 import { ... } from 'zero-type';
@@ -18,9 +18,9 @@ typeCheck.compile(); //compile type checker
 let isValid = typeCheck.validate(myObject); //use type checker
 ```
 
-This **compiles before runtime**; creating two validator functions and writing the generated typescript code to a file so that it only needs to be compiled once before the prgram that uses it runs.
+This **compiles before runtime**; creating two validator functions and writing the generated typescript code to a file so that it only needs to be compiled once before the program that uses it runs.
 
-The validators can check using user defined values like classes, but need to be told how to get a refrence to the value in the generated file (if you are not compiling before hand this handled automatically). Either use addStaticImport to let the generated file import the value or dynamicly link the values (explained further down).
+The validators can check using user defined values like classes, but need to be told how to get a reference to the value in the generated file (if you are compiling during runtime this is handled automatically). Either use addStaticImport to let the generated file import the value or dynamically link the values (explained further down).
 
 ```typescript
 import { writeFileSync } from 'fs';
@@ -61,7 +61,7 @@ let isValid = foobarValidator(obj, dynamicLinks);
 ---
 ## Linking
 
-When your validator needs to use using user defined values like classes or values sotred in objects it needs to know how to get references to them.
+When your validator needs to use user defined values like classes or values stored in objects it needs to know how to get references to them.
 - If you are **compiling during runtime** you do not need to do anything extra.
 - If you are **compiling before runtime** and **no links are needed** you do not need to do anything extra.
 - If you are **compiling before runtime** and **links are needed** you will need to either add static imports using `ZeroType.prototype.addStaticImport` or supply them using dynamic linking. `ZeroType.prototype.dynamicLinksSummary` will return a template for the object needed for the dynamic links. That object is passed to the validator as the second argument or excluded if no dynamic links are needed.
@@ -95,7 +95,7 @@ console.log(errors);
 ### `ZeroType.prototype.compile(isTypescript: boolean = true, debug: boolean = false)`
 compiles all validators created with `ZeroType` instance
 
-Typescript type guards are generated from `TypeDefinitons` and not what typescript currently thinks the types are so inaccurate types are irrelevent when compiling before runtime.
+Typescript type guards are generated from `TypeDefinitons` and not what typescript currently thinks the types are so inaccurate types are irrelevant when compiling before runtime.
 
 ---
 ### `ZeroType.prototype.addStaticImport(value: any, importName: string, importFile: string)`

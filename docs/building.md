@@ -22,7 +22,7 @@ zt.create({
 - `obj` - recursively builds this value into `TypeDefinition`s
 	- `TypeDefinition`s get left as is
 	- Objects - will check that the prototype top is an object and that all properties are present unless optional flag is marked on property's value using `typeOptional`; all property values will be evaluated using this same algorithm
-	- Arrays - will check that the prototype top is an array, that all properties are match of one of the types in the array, and that there are no non-sequential proprties start from zero; all property values will be evaluated using this same algorithm
+	- Arrays - will check that the prototype top is an array, that all properties are match of one of the types in the array, and that there are no non-sequential properties start from zero; all property values will be evaluated using this same algorithm
 	- Classes (functions) - will check that the prototype chain includes this class
 	> Note: when doing this typescript will assume `typeof myClass` rather than `myClass`; adding typeClass() fixes this. When compiling to a file typescript type is correct.
 	- Other - will check that the prototype top is the same as the supplied value
@@ -82,9 +82,9 @@ similar to `typeOptions`, but it only checks for specific primitive values or ty
 returns a `TypeDefinition`
 
 ### Notes
-- When `TypeDefinition`s are passed, `PrototypeTopCheck` is looked for to resolve type.
+- When `TypeDefinition`s are passed, `PrototypeTopCheck` is looked for to resolve the type.
 - When primitives values are passed both type and value are checked. If something like the number 42 and `NumberType` are both present only a check for being a number is done. 
-- Note that strict type check happens so 42 is not equal to '42'.
+- Note that strict type checking happens so 42 is not equal to '42'.
 - Typescript will resolve primitive values as their type rather than a literal; you can fill in the `<Type>`
 for it to be more accurate
 ```typescript
