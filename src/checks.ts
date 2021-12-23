@@ -211,10 +211,11 @@ export class ArrayStrictCheck extends TypeCheck
 	{
 		info.ch.enterScope();
 		let indexVar = info.ch.name();
-		info.ch.exitScope();
-		return `{if(${compileInlineIsPrimitive(path, false)})${compileDebug(info, debugPath, `'ArrayStrictCheck'`, `'not be a non primitive value'`)}else{`
+		let code = `{if(${compileInlineIsPrimitive(path, false)})${compileDebug(info, debugPath, `'ArrayStrictCheck'`, `'not be a non primitive value'`)}else{`
 		+ `let ${indexVar} = 0;for(;${indexVar} in ${path};${indexVar}++)${compileAddScope(this.default.compile(info, `${path}[${indexVar}]`, `${debugPath}+'['+${indexVar}+']'`))}`
 		+ `if(Object.keys(${path}).length!=${indexVar})${compileDebug(info, debugPath, `'ArrayStrictCheck'`, `'not a sequentially strict array'`)}}}`;
+		info.ch.exitScope();
+		return code;
 	}
 }
 
