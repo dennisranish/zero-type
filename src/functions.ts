@@ -23,9 +23,11 @@ export function prototypeIncludes(obj: any, what: Function): boolean
 	if(obj === null) return what == Null;
 	if(what === Exotic || what === PrototypeEnd)
 	{
-		let prototype = Object.getPrototypeOf(obj);
-		if(prototype == null) return what == PrototypeEnd;
-		return what == Exotic && isExoticPrototype(prototype);
+		for(let prototype = obj;;) {
+			prototype = Object.getPrototypeOf(prototype);
+			if(prototype == null) return what == PrototypeEnd;
+			if(isExoticPrototype(prototype)) return what == Exotic;
+		}
 	}
 	if(typeof what == 'function') return Object(obj) instanceof what;
 	return false;
