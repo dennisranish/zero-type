@@ -1,6 +1,6 @@
 # zero-type - docs
 
-Extensive and customizable type checking. Deep object structures, classes, specific values, and custom check functions. Compiles type validators into fast and small functions and has type guards if using typescript. Optionally type validators can be compiled to output a list of errors in submitted the object. This library also comes with handy basic type checking functions.
+Fast, extensive and customizable type checking library. Deep object structures, specific values, options, and custom check functions. Compiles type validators into fast and small functions and has type guards if using typescript. Optionally type validators can be compiled to output a list of errors in submitted the object. This library also comes with handy basic type checking functions.
 
 - [Building](https://github.com/dennisranish/zero-type/blob/master/docs/building.md)
 - [Compiling](https://github.com/dennisranish/zero-type/blob/master/docs/compiling.md)
