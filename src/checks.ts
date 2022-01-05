@@ -3,6 +3,7 @@ import { recursiveTypeBuild } from './build';
 import { compileTsType, compileDebug, compileInlineIsPrimitive, compileAddScope } from './compile';
 import { AnyTypeDefinition, TypeCheck, TypeDefinition } from './core';
 import { isPrimitive, prototypeIncludes, prototypeTop } from './functions';
+import { primitiveTypes } from '.';
 
 export class PrototypeTopCheck extends TypeCheck {
 	prototype: Function;
@@ -48,7 +49,7 @@ export class ValueOptionCheck extends TypeCheck {
 		for(let option of options)
 		{
 			let prototype = prototypeTop(option);
-			if(isPrimitive(option)) this.options.push({ prototype, value: option });
+			if(primitiveTypes.includes(prototype)) this.options.push({ prototype, value: option.valueOf() });
 			else if(option instanceof TypeDefinition) for(let check of option.checks)
 			{
 				if(check instanceof PrototypeTopCheck)

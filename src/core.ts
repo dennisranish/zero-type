@@ -115,7 +115,7 @@ export class ZeroTypeDef<Type>
 	validate(obj: any): obj is Type
 	{
 		if(this.instanceFunction == undefined) throw Error('ZeroType: function must be compiled before running');
-		this.instanceValues[this.errorsLinkName] = this.errors = [];
+		this.instanceValues[this.errorsLinkName.slice(2)] = this.errors = [];
 		let result = this.instanceFunction(obj, this.instanceValues);
 		if(this.isDebug) return this.errors.length == 0;
 		return result;
