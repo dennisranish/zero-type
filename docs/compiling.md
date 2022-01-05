@@ -31,18 +31,19 @@ const typeCheck = zt.create(..., 'foobarValidator'); //build type checker
 const typeCheck2 = zt.create(..., 'foobarValidator2'); //build other type checker
 
 //add static imports if they are needed
-zt.addStaticImport(MyClass, 'MyClass', './MyClassFile');
+zt.addStaticImport(customCheckFunction, 'customCheckFunction', './MyCustomCheckFuntions'); 
+zt.addStaticImport(info, 'info', './config');
 
 zt.compile(); //compile both type checks
 writeFileSync('./src/validate.ts', zt.code); //save code to file
 console.log(zt.dynamicLinksSummary); //get dynamic links if they are needed
 ```
 
-This is the console output logging `zt.dynamicLinksSummary`, which is a template of the values the validators will need provided to them. Replace the undefined with the value commented and supply the object as the seconds argument to the validator functions. Make sure not to change the property names.
+This is the console output logging `zt.dynamicLinksSummary`, which is a template of the values the validators will need provided to them. Replace the undefined with the value commented and supply the object as the second argument to the validator functions. Make sure not to change the property names.
 
 ```typescript
 let dynamicLinks = {
-	a: undefined, //MyClass2
+	a: undefined, //SomeInfoObj
 };
 ```
 
@@ -52,7 +53,7 @@ Then using the validator would look like this. Also the validator function is a 
 import { foobarValidator } from "./validate";
 
 let dynamicLinks = {
-	a: MyClass2, //MyClass2
+	a: SomeInfoObj, //SomeInfoObj
 };
 
 let isValid = foobarValidator(obj, dynamicLinks);
@@ -61,7 +62,10 @@ let isValid = foobarValidator(obj, dynamicLinks);
 ---
 ## Linking
 
-When your validator needs to use user defined values like classes or values stored in objects it needs to know how to get references to them.
+When your validator needs to use user defined values it needs to know how to get references to them.
+
+One reason for imports is that values can change anytime and validators will use those new values without needing to be recompiled. Another reason is, when writing custom checks, this lets you call functions when performing the check.
+
 - If you are **compiling during runtime** you do not need to do anything extra.
 - If you are **compiling before runtime** and **no links are needed** you do not need to do anything extra.
 - If you are **compiling before runtime** and **links are needed** you will need to either add static imports using `ZeroType.prototype.addStaticImport` or supply them using dynamic linking. `ZeroType.prototype.dynamicLinksSummary` will return a template for the object needed for the dynamic links. That object is passed to the validator as the second argument or excluded if no dynamic links are needed.
@@ -101,6 +105,18 @@ Typescript type guards are generated from `TypeDefinitons` and not what typescri
 ### `ZeroType.prototype.addStaticImport(value: any, importName: string, importFile: string)`
 adds a static import that can be used when compiling
 > Note: if import is not needed by the validators it is not included in the code
+
+---
+### `ZeroType.prototype.dynamicLinksSummary?: string`
+A template of the values the validators will need provided to them. This is set when calling `ZeroType.prototype.compile`.
+
+```typescript
+let dynamicLinks = {
+	a: undefined, //SomeInfoObj
+};
+```
+This is an example value the string will have. To use, replace the `undefined`s with the values commented and supply the object as the second argument to the validator functions.
+> Note: make sure not to change the property names
 
 ---
 ### Compiled before runtime: `validator(obj: any, dynamicLinks: any): obj is Type`
