@@ -3,6 +3,16 @@ export function Null(){}
 export function Exotic(){}
 export function PrototypeEnd(){}
 
+export const primitiveTypes: Function[] = [
+	Undefined,
+	Null,
+	Boolean,
+	Number,
+	String,
+	BigInt,
+	Symbol,
+];
+
 export const javascriptKeywords = [
 	'do',
 	'if',

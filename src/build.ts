@@ -1,8 +1,7 @@
-import { TypeCheck, TypeDefinition, ZeroTypeDef } from './core';
-import { OptionCheck, ObjectPropertiesCheck, PrototypeTopCheck, PrototypeIncludesCheck, ArrayStrictCheck } from './checks';
+import { primitiveTypes } from './consts';
+import { ZeroType, TypeCheck, TypeDefinition, ZeroTypeDef } from './core';
+import { OptionCheck, ObjectPropertiesCheck, PrototypeTopCheck, PrototypeIncludesCheck, ArrayStrictCheck, ValueOptionCheck } from './checks';
 import { prototypeTop } from './functions';
-import { ZeroType } from './core';
-import { ValueOptionCheck } from '.';
 
 ZeroType.prototype.create = function <Type>(obj: Type, name: string = ''): ZeroTypeDef<Type>
 {
@@ -63,6 +62,7 @@ export function recursiveTypeBuild(obj: any): TypeDefinition
 		return objTypeDef;
 	}
 	else if(objPrototypeTop == Function) return new TypeDefinition([new PrototypeIncludesCheck(obj)]);
+	else if(primitiveTypes.includes(objPrototypeTop)) return new TypeDefinition([new ValueOptionCheck([obj])]);
 	else return new TypeDefinition([new PrototypeTopCheck(objPrototypeTop)]);
 }
 

@@ -25,6 +25,7 @@ zt.create({
 	- Arrays - will check that the prototype top is an array, that all properties are match of one of the types in the array, and that there are no non-sequential properties start from zero; all property values will be evaluated using this same algorithm
 	- Classes (functions) - will check that the prototype chain includes this class
 	> Note: when doing this typescript will assume `typeof myClass` rather than `myClass`; adding typeClass() fixes this. When compiling to a file typescript type is correct.
+	- Primitive values - will check for the exact value and type (For example: `'10'` will result in a check for not just a string but also that it has the value `'10'`)
 	- Other - will check that the prototype top is the same as the supplied value
 ---
 ### `ZeroType.prototype.create<Type>(obj: Type, name?: string): ZeroTypeDef<Type>`
@@ -76,7 +77,7 @@ returns a `TypeDefinition`
 
 ---
 ### `typeValues<Type>(options: Type[]): Type`
-similar to `typeOptions`, but it only checks for specific primitive values or types.
+similar to `typeOptions`, but it only checks for: specific primitive values or types.
 - `options` - specific primitive values or types to check for (ex: `typeValues([42, 'hi', false, NumberType, typeClass(MyClass)])`)
 
 returns a `TypeDefinition`
@@ -86,7 +87,7 @@ returns a `TypeDefinition`
 - When primitives values are passed both type and value are checked. If something like the number 42 and `NumberType` are both present only a check for being a number is done. 
 - Note that strict type checking happens so 42 is not equal to '42'.
 - Typescript will resolve primitive values as their type rather than a literal; you can fill in the `<Type>`
-for it to be more accurate
+for it to be more accurate. Correct types are generated when compiling before runtime.
 ```typescript
 typeValues< 0 | 1 | 2 | 42 >([ 0, 1, 2, 42 ]); //by default typescript assumes type number
 ```
