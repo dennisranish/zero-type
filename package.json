@@ -1,6 +1,7 @@
 {
 	"name": "zero-type",
 	"version": "1.0.4",
+	"type": "module",
 	"description": "Fast, extensive and customizable type checking library",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
