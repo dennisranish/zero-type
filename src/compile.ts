@@ -1,5 +1,5 @@
 import { CompileInfo } from './compileHelper';
-import { tsTypePrimitives, Exotic } from './consts';
+import { tsTypePrimitives } from './consts';
 
 export function toBijectiveNumber(number = 0, digitSets: string[])
 {

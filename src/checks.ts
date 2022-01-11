@@ -3,7 +3,7 @@ import { recursiveTypeBuild } from './build';
 import { compileTsType, compileDebug, compileInlineIsPrimitive, compileAddScope } from './compile';
 import { AnyTypeDefinition, TypeCheck, TypeDefinition } from './core';
 import { isPrimitive, prototypeIncludes, prototypeTop } from './functions';
-import { primitiveTypes } from '.';
+import { primitiveTypes } from './consts';
 
 export class PrototypeTopCheck extends TypeCheck {
 	prototype: Function;
