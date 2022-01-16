@@ -150,4 +150,18 @@ export const renderConsts = new Map<any, string>([
 	[WebAssembly.CompileError, 'WebAssembly.CompileError'],
 	[WebAssembly.LinkError, 'WebAssembly.LinkError'],
 	[WebAssembly.RuntimeError, 'WebAssembly.RuntimeError'],
+
+	[Symbol.asyncIterator, 'Symbol.asyncIterator'],
+	[Symbol.hasInstance, 'Symbol.hasInstance'],
+	[Symbol.isConcatSpreadable, 'Symbol.isConcatSpreadable'],
+	[Symbol.iterator, 'Symbol.iterator'],
+	[Symbol.match, 'Symbol.match'],
+	[Symbol.matchAll, 'Symbol.matchAll'],
+	[Symbol.replace, 'Symbol.replace'],
+	[Symbol.search, 'Symbol.search'],
+	[Symbol.split, 'Symbol.split'],
+	[Symbol.species, 'Symbol.species'],
+	[Symbol.toPrimitive, 'Symbol.toPrimitive'],
+	[Symbol.toStringTag, 'Symbol.toStringTag'],
+	[Symbol.unscopables, 'Symbol.unscopables'],
 ]);

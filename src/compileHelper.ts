@@ -37,7 +37,6 @@ export class CompileHelper
 		|| primitiveType == 'number') return String(value);
 		if(primitiveType == 'string') return `'${String(value)}'`;
 		if(primitiveType == 'bigint') return `${String(value)}n`;
-		//if(primitiveType == 'symbol') return String(value);
 		if(renderConsts.has(value)) return renderConsts.get(value) as string;
 
 		let link;
