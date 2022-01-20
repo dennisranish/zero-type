@@ -1,4 +1,4 @@
-import { PrototypeEnd, Exotic, Null, Undefined } from "./consts";
+import { PrototypeEnd, Exotic, Null, Undefined } from './consts.js';
 
 export function isExoticPrototype(prototype: any)
 {

@@ -1,6 +1,6 @@
-import { toBijectiveNumber } from "./compile";
-import { digitSetFirst_simple, digitSet_simple, renderConsts, javascriptKeywords } from "./consts";
-import { fixedTypeof } from "./functions";
+import { toBijectiveNumber } from './compile.js';
+import { digitSetFirst_simple, digitSet_simple, renderConsts, javascriptKeywords } from './consts.js';
+import { fixedTypeof } from './functions.js';
 
 export const enum CompileType { file, instance }
 

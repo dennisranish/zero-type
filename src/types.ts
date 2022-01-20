@@ -1,6 +1,6 @@
-import { PrototypeTopCheck, IntegerCheck, NonEmptyStringCheck } from "./checks";
-import { Null, Undefined } from "./consts";
-import { AnyTypeDefinition, TypeDefinition } from "./core";
+import { PrototypeTopCheck, IntegerCheck, NonEmptyStringCheck } from './checks.js';
+import { Null, Undefined } from './consts.js';
+import { AnyTypeDefinition, TypeDefinition } from './core.js';
 
 export const UndefinedTypeDefinition = new TypeDefinition([new PrototypeTopCheck(Undefined)]);
 export const NullTypeDefinition = new TypeDefinition([new PrototypeTopCheck(Null)]);

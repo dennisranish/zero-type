@@ -1,9 +1,9 @@
-import { CompileInfo } from './compileHelper';
-import { recursiveTypeBuild } from './build';
-import { compileTsType, compileDebug, compileInlineIsPrimitive, compileAddScope } from './compile';
-import { AnyTypeDefinition, TypeCheck, TypeDefinition } from './core';
-import { isPrimitive, prototypeIncludes, prototypeTop } from './functions';
-import { primitiveTypes } from './consts';
+import { CompileInfo } from './compileHelper.js';
+import { recursiveTypeBuild } from './build.js';
+import { compileTsType, compileDebug, compileInlineIsPrimitive, compileAddScope } from './compile.js';
+import { AnyTypeDefinition, TypeCheck, TypeDefinition } from './core.js';
+import { isPrimitive, prototypeIncludes, prototypeTop } from './functions.js';
+import { primitiveTypes } from './consts.js';
 
 export class PrototypeTopCheck extends TypeCheck {
 	prototype: Function;

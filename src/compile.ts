@@ -1,5 +1,5 @@
-import { CompileInfo } from './compileHelper';
-import { tsTypePrimitives } from './consts';
+import { CompileInfo } from './compileHelper.js';
+import { tsTypePrimitives } from './consts.js';
 
 export function toBijectiveNumber(number = 0, digitSets: string[])
 {

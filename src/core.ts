@@ -1,7 +1,7 @@
-import { compileAddScope } from "./compile";
-import { CompileHelper, CompileInfo, CompileType, LinkType } from "./compileHelper";
-import { Exotic, javascriptKeywords, Null, Undefined } from "./consts";
-import { prototypeIncludes, prototypeTop } from './functions';
+import { compileAddScope } from './compile.js';
+import { CompileHelper, CompileInfo, CompileType, LinkType } from './compileHelper.js';
+import { Exotic, javascriptKeywords, Null, Undefined } from './consts.js';
+import { prototypeIncludes, prototypeTop } from './functions.js';
 
 export class ZeroType
 {

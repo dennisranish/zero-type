@@ -1,7 +1,7 @@
-import { primitiveTypes } from './consts';
-import { ZeroType, TypeCheck, TypeDefinition, ZeroTypeDef } from './core';
-import { OptionCheck, ObjectPropertiesCheck, PrototypeTopCheck, PrototypeIncludesCheck, ArrayStrictCheck, ValueOptionCheck } from './checks';
-import { prototypeTop } from './functions';
+import { primitiveTypes } from './consts.js';
+import { ZeroType, TypeCheck, TypeDefinition, ZeroTypeDef } from './core.js';
+import { OptionCheck, ObjectPropertiesCheck, PrototypeTopCheck, PrototypeIncludesCheck, ArrayStrictCheck, ValueOptionCheck } from './checks.js';
+import { prototypeTop } from './functions.js';
 
 ZeroType.prototype.create = function <Type>(obj: Type, name: string = ''): ZeroTypeDef<Type>
 {
