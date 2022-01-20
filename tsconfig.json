@@ -5,6 +5,7 @@
 		"module": "es2020",
 		"moduleResolution": "node",
 		"declaration": true,
+		"sourceMap": true,
 		"outDir": "./lib",
 		"strict": true,
 		"downlevelIteration": true,
