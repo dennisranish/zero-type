@@ -94,7 +94,8 @@ export class ZeroTypeDef<Type>
 	constructor(parent: ZeroType, definition: TypeDefinition)
 	{
 		this.parent = parent;
-		this.definition = definition;
+		if(definition.optional) this.definition = definition.optional;
+		else this.definition = definition;
 	}
 
 	compile(debug: boolean = false)
@@ -125,7 +126,7 @@ export class ZeroTypeDef<Type>
 export class TypeDefinition
 {
 	static tsTypePrecedence: Function[][];
-	optinal: undefined;
+	optional?: TypeDefinition;
 	checks: TypeCheck[];
 
 	constructor(checks: TypeCheck[] = [])

@@ -136,9 +136,12 @@ export class ObjectPropertiesCheck extends TypeCheck
 
 		for(let key in named)
 		{
-			let subObjTypeDef = recursiveTypeBuild(named[key]);
-			this.names.set(key, subObjTypeDef);
-			if('optinal' in subObjTypeDef) this.namesOptional.add(key);
+			let subObjTypeDef = recursiveTypeBuild(named[key], true);
+			if(subObjTypeDef.optional) {
+				this.namesOptional.add(key);
+				this.names.set(key, subObjTypeDef.optional);
+			}
+			else this.names.set(key, subObjTypeDef);
 		}
 
 		if(defaultOptions.length > 1) this.default = new TypeDefinition([new OptionCheck(defaultOptions)]);

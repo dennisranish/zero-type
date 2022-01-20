@@ -13,9 +13,9 @@ ZeroType.prototype.create = function <Type>(obj: Type, name: string = ''): ZeroT
 
 export function typeOptional<Type>(obj: Type): undefined | Type
 {
-	let builtType = recursiveTypeBuild(obj);
-	builtType.optinal = undefined;
-	return builtType as unknown as undefined | Type;
+	let optionalType = new TypeDefinition();
+	optionalType.optional = recursiveTypeBuild(obj);
+	return optionalType as unknown as undefined | Type;
 }
 
 export function typeOptions<Type>(obj: Type[]): Type
@@ -47,10 +47,13 @@ export function typeCustom<Type>(checks: TypeCheck[]): Type
 	return objTypeDef as unknown as Type;
 }
 
-export function recursiveTypeBuild(obj: any): TypeDefinition
+export function recursiveTypeBuild(obj: any, leaveOptional: boolean = false): TypeDefinition
 {
 	let objPrototypeTop = prototypeTop(obj);
-	if(objPrototypeTop == TypeDefinition) return obj;
+	if(objPrototypeTop == TypeDefinition) {
+		if(!leaveOptional && obj.optional) return obj.optional;
+		return obj;
+	}
 	else if(objPrototypeTop == Object)
 	{
 		let objTypeDef = new TypeDefinition([new PrototypeTopCheck(Object), new ObjectPropertiesCheck(obj, [])]);
