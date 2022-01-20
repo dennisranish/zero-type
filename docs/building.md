@@ -46,23 +46,31 @@ will check that value matches at least one of the `TypeDefinition`
 returns a `TypeDefinition`
 
 ---
-### `typeObject<Type>(obj: Type, defaultOptions: any[], checks: TypeCheck[]): Type`
+### `typeObject<Type>(obj: Type, defaultOptions: any[], checks?: TypeCheck[] | Function): Type`
 similar to objects passed to `recursiveTypeBuild`, but gives you more control
-> Note: this does not add a prototype top bring object check
 - `obj` - builds same as objects passed to `recursiveTypeBuild` except does not check that prototype top is object
 - `defaultOptions` - array of options for any properties not in `obj`
-- `checks` - array of additional checks (ex: `PrototypeTopCheck`, `PrototypeIncludesCheck`)
+- `checks` - array of additional checks (ex: `PrototypeTopCheck`, `CustomCheck`); or function which will be checked for using `PrototypeTopCheck` (ex: `Array` to check that it is an array); or no value is passed in which case it will check that prototype top is an `Object` using `PrototypeTopCheck`
 
 returns a `TypeDefinition`
 
-For example this would check an object's properties and make sure that its prototype chain includes `MyClass`.
+For example this would: check an object's properties `foo` and `bar`; check that any other properties are of boolean type; and check that it is an object.
 ```typescript
 typeObject({
 	foo: [ IntegerType ],
 	bar: NonEmptyStringType,
-}, [], [
-	new PrototypeIncludesCheck(MyClass),
+}, [
+	BooleanType
 ])
+```
+
+This example would: check for the property `0` being a string; check that any other properties are numbers; and check that it is an array.
+```typescript
+typeObject({
+	"0": StringType
+}, [
+	NumberType
+], Array)
 ```
 
 ---

@@ -23,9 +23,12 @@ export function typeOptions<Type>(obj: Type[]): Type
 	return new TypeDefinition([new OptionCheck(obj)]) as unknown as Type;
 }
 
-export function typeObject<Type>(obj: Type, defaultOptions: any[], checks: TypeCheck[]): Type
+export function typeObject<Type>(obj: Type, defaultOptions: any[], checks?: TypeCheck[] | Function): Type
 {
-	let objTypeDef = new TypeDefinition([...checks, new ObjectPropertiesCheck(obj, defaultOptions)]);
+	let objTypeDef;
+	if(checks == undefined) objTypeDef = new TypeDefinition([new PrototypeTopCheck(Object), new ObjectPropertiesCheck(obj, defaultOptions)]);
+	else if(Array.isArray(checks)) objTypeDef = new TypeDefinition([...checks, new ObjectPropertiesCheck(obj, defaultOptions)]);
+	else objTypeDef = new TypeDefinition([new PrototypeTopCheck(checks), new ObjectPropertiesCheck(obj, defaultOptions)]);
 	return objTypeDef as unknown as Type;
 }
 
