@@ -35,7 +35,7 @@ export class CompileHelper
 		|| primitiveType == 'undefined'
 		|| primitiveType == 'boolean'
 		|| primitiveType == 'number') return String(value);
-		if(primitiveType == 'string') return `'${String(value)}'`;
+		if(primitiveType == 'string') return JSON.stringify(value); //return `'${String(value)}'`;
 		if(primitiveType == 'bigint') return `${String(value)}n`;
 		if(renderConsts.has(value)) return renderConsts.get(value) as string;
 
