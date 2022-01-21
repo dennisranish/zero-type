@@ -1,5 +1,5 @@
 import { toBijectiveNumber } from './compile.js';
-import { digitSetFirst_simple, digitSet_simple, renderConsts, javascriptKeywords } from './consts.js';
+import { digitSetFirst_simple, digitSet_simple, renderConsts, javascriptKeywords, digitSetFirst_ascii, digitSet_ascii } from './consts.js';
 import { fixedTypeof } from './functions.js';
 
 export const enum CompileType { file, instance }
@@ -99,6 +99,15 @@ export class CompileHelper
 	{
 		if(global && this.reservedGlobalNames.includes(name)) return false;
 		if(global && javascriptKeywords.includes(name)) return false;
+		return true;
+	}
+
+	isSafeName(name: string): boolean {
+		if(javascriptKeywords.includes(name)) return false;
+		if(!digitSetFirst_ascii.includes(name[0])) return false;
+		for(let i = 1; i < name.length; i++) {
+			if(!digitSet_ascii.includes(name[i])) return false;
+		}
 		return true;
 	}
 
