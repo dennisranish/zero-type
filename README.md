@@ -82,3 +82,52 @@ let dynamicLinks = {
 
 let isValid = foobarValidator(obj, dynamicLinks);
 ```
+
+---
+## More examples
+
+In this example the validator checks for an array containing one of three object types. Here the type property checks for specific values by using `typeValues` or supplying a specific value. This way the proprties `creationInfo` and `data` will both only be allowed when `type` is `requestTypes.create` aka `2`. Same logic is used for the other two objects.
+```typescript
+import { writeFileSync } from 'fs';
+import { NonEmptyStringType, StringType, typeOptional, typeValues, ZeroType } from "zero-type";
+
+const enum requestTypes {
+	read = 0, readInfo = 1, create = 2, remove = 3, update = 4
+}
+
+let zt = new ZeroType();
+zt.create([{
+		type: typeValues([requestTypes.read, requestTypes.readInfo, requestTypes.remove]),
+	}, {
+		type: requestTypes.create,
+		creationInfo: NonEmptyStringType,
+		data: typeOptional(StringType),
+	}, {
+		type: requestTypes.update,
+		data: StringType
+	}
+], 'validateUpdatePartsRequest');
+
+zt.compile();
+writeFileSync('./src/validate.ts', zt.code as string);
+
+```
+> Note: An array will result in a check for one of the supplied values at all existent indexes. It will not act as tuple; if that functionality is need use the `typeTuple` build function. [More on that here.](https://github.com/dennisranish/zero-type/blob/master/docs/building.md)
+
+This is the validator functions type.
+```typescript
+function validateUpdatePartsRequest(obj: any, _?: any): obj is ({
+    type: (0 | 1 | 3);
+} | {
+    type: (2);
+    creationInfo: string;
+    data?: string;
+} | {
+    type: (4);
+    data: string;
+})[]
+```
+
+---
+
+> Note this readme is just a preview for full docs [go here](https://github.com/dennisranish/zero-type/tree/master/docs#readme).
