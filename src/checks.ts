@@ -150,23 +150,42 @@ export class ObjectPropertiesCheck extends TypeCheck
 
 	compileTsType(info: CompileInfo)
 	{
-		let type = '{';
-		let defaultType = '';
-		for(let [property, def] of this.names)
-		{
-			let defTsType = def.compileTsType(info);
-			type += `${property}${this.namesOptional.has(property) ? '?' : ''}:${defTsType},`;
-			if(defaultType.length == 0) defaultType += defTsType;
-			else defaultType += '|' + defTsType;
+		let type = '';
+
+		let isTuple = (this.default == undefined), index = 0;
+		for(let [property] of this.names) {
+			if(Number(property) != index || this.namesOptional.has(property)) {
+				isTuple = false;
+				break;
+			}
+			index++;
 		}
-		if(this.default)
-		{
-			let defaultTsType = this.default.compileTsType(info)
-			if(defaultType.length == 0) defaultType += defaultTsType;
-			else defaultType += '|' + defaultTsType;
-			type += `[key:string]:${defaultTsType},`;
+
+		if(isTuple) {
+			type += '[';
+			for(let [property, def] of this.names) {
+				let defTsType = def.compileTsType(info);
+				type += `${defTsType},`;
+			}
+			type += ']';
 		}
-		type += '}';
+		else {
+			type += '{';
+			let defaultType = '';
+			for(let [property, def] of this.names) {
+				let defTsType = def.compileTsType(info);
+				type += `${property}${this.namesOptional.has(property) ? '?' : ''}:${defTsType},`;
+				if(defaultType.length == 0) defaultType += defTsType;
+				else defaultType += '|' + defTsType;
+			}
+			if(this.default) {
+				let defaultTsType = this.default.compileTsType(info)
+				if(defaultType.length == 0) defaultType += defaultTsType;
+				else defaultType += '|' + defaultTsType;
+				type += `[key:string]:${defaultTsType},`;
+			}
+			type += '}';
+		}
 		return type;
 	}
 
