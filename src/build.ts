@@ -44,6 +44,10 @@ export function typeValues<Type>(options: Type[]): Type
 	return objTypeDef as unknown as Type;
 }
 
+export function typeTuple<Type extends any[]>(obj: [...Type]): Type {
+	return new TypeDefinition([new PrototypeTopCheck(Array), new ObjectPropertiesCheck(obj, [])]) as unknown as Type;
+}
+
 export function typeCustom<Type>(checks: TypeCheck[]): Type
 {
 	let objTypeDef = new TypeDefinition([...checks]);

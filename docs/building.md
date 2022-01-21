@@ -101,6 +101,16 @@ typeValues< 0 | 1 | 2 | 42 >([ 0, 1, 2, 42 ]); //by default typescript assumes t
 ```
 
 ---
+### `typeTuple<Type extends any[]>(obj: [...Type]): Type`
+checks for a tuple type; aka: checks for an array; checks that only specified properties exist; and checks that each has the correct type
+- `obj` - array of tuple value types; builds each option using `recursiveTypeBuild`
+
+For example this will check for an array containing a number, then a string.
+```typescript
+typeTuple([NumberType, StringType])
+```
+
+---
 ### `typeCustom<Type>(checks: TypeCheck[]): Type`
 - `checks` - what to check for (ex: `PrototypeTopCheck`, `PrototypeIncludesCheck`)
 
