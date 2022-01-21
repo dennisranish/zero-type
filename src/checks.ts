@@ -197,12 +197,16 @@ export class ObjectPropertiesCheck extends TypeCheck
 		for(let [property, _] of this.names)
 		{
 			if(this.namesOptional.has(property)) continue;
-			code += `if(!('${property}' in ${path}))${compileDebug(info, `${debugPath}+'.${property}'`, `'ObjectPropertiesCheck'`, `'property is missing'`)}`;
+			let accessProperty = `.${property}`;
+			if(!info.ch.isSafeName(property)) accessProperty = `[${info.ch.value(property)}]`;
+			code += `if(!(${info.ch.value(property)} in ${path}))${compileDebug(info, `${debugPath}+${info.ch.value(accessProperty)}`, `'ObjectPropertiesCheck'`, `'property is missing'`)}`;
 		}
 		code += `for(let ${propertyVar} in ${path}){`;
 		for(let [property, def] of this.names)
 		{
-			code += `if(${propertyVar}=='${property}')${compileAddScope(def.compile(info, `${path}.${property}`, `${debugPath}+'.${property}'`))}else `;
+			let accessProperty = `.${property}`;
+			if(!info.ch.isSafeName(property)) accessProperty = `[${info.ch.value(property)}]`;
+			code += `if(${propertyVar}==${info.ch.value(property)})${compileAddScope(def.compile(info, `${path}${accessProperty}`, `${debugPath}+${info.ch.value(accessProperty)}`))}else `;
 		}
 		if(this.default) code += compileAddScope(this.default.compile(info, `${path}[${propertyVar}]`, `${debugPath}+'.'+${propertyVar}`));
 		else code += compileDebug(info, `${debugPath}+'.'+${propertyVar}`, `'ObjectPropertiesCheck'`, `'property is not allowed'`);
